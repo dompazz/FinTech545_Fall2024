@@ -1,0 +1,96 @@
+create a function `generateData(name,path)`
+
+Take name, and hash it with sha1 and use that as the seed for the random number generator
+```
+import hashlib as hs
+import numpy as np
+
+nameHash = hs.sha1(name.encode('utf-8')).hexdigest()
+seed = int(nameHash[0:8],16)
+
+np.random.seed(seed)
+```
+
+We will output results into the PATH as CSV files.
+
+Problem 1
+    a = random int between [0,99]
+    b = random int between [0,a]
+    a = a/100
+    b = b/100
+
+    corr = [1 a b
+            a 1 a
+            b a 1]
+
+    sd = abs(np.random.normal(size=3))
+    cov = np.diag(sd) @ corr @ np.diag(sd)
+
+    rnd = np.random.multivariate_normal([.0,.0,.0],cov,size=20)
+    start_prices = np.random.normal(100,10,size=3)
+
+    use the rnd and start_prices to make a series of 20 prices 
+
+    m1 = pick two random numbers between [0,19] - remove those from the first column
+
+    m2 = pick 1 random number from [0,19] - remove (m1[0],m2) from the second column
+
+    m3 = pick 1 random numer from [0,19] = remove (m1[1],m3) from the 3rd column
+
+    write this as Problem1.csv  
+
+Problem 2
+    Generate Key Value Pairs
+        Underlying : np.random.normal(100,10,1)
+        Strike : Underlying + np.random.normal(0,10,1)
+        IV: np.random.normal(0.2,0.02,1) -- round to 2 decimal places
+        TTM : np.random.normal(150,10,1) -- round to nearest int
+        RF : 0.045
+        DivRate : abs(np.random.normal(0.05,0.005,1)) -- abs() to make sure it is not < 0
+
+    Output as Problem2.csv
+
+Problem 3
+    a = random int between [0,99] / 100
+
+    corr = [1 a a
+            a 1 a
+            a a 1]
+    sd = abs(np.random.normal(.2,.02,size=3))
+    cov = np.diag(sd) @ corr @ np.diag(sd)
+    Output Problem3_cov.csv
+
+    sr = abs(np.random.normal(0.5,0.1,1))
+
+    Key Value Pairs
+    RF : 0.045
+    Expected_Value_1 : sr * sd[0] + RF
+    Expected_Value_2 : sr * sd[1] + RF
+    Expected_Value_3 : sr * sd[2] + RF
+    Output Problem3_ER.csv
+
+Problem 4
+    w = abs(np.random.normal(0.5,0.2,3))
+    w = w/sum(w)
+
+    Output Problem4_startWeigth.csv
+
+    r = np.random.normal(0,0.2*sqrt(12),(20,3))
+
+    Output Problem4_returns.csv
+
+Problem 5
+    df = max(5,min(12,np.random.normal(8.0,3.0,1)[0]))
+    a = random int between [0,99] / 100
+    corr = [1 a a a
+            a 1 a a
+            a a 1 a
+            a a a 1]
+    s = abs(np.random.normal(.02,.002,size=4))
+    cov = np.diag(s) @ corr @ np.diag(s)
+    rnd = scipy.stats.multivariate_t([0,0,0,0],cov,df=df).rvs(size=61)
+    start_prices = np.random.normal(100,10,size=4)
+
+    use the rnd and start_prices to make a series of 61 prices P_t = P_t-1 * (1+r)
+
+    Output Problem5.csv

@@ -1,0 +1,37 @@
+# Problem 1
+# Input Prices
+# Calculate Log Returns (2pt)
+# Calculate Pairwise Covariance (5pt)
+# Is it PSD?  Fix with Near_PSD (3pt)
+
+# Problem 2
+# Given an call option input, calculate using GBSM.  Note TTM is given in days.  Assume 255 days a yearCalcul
+#   - Price (1pt)
+#   - Delta (1pt)
+#   - Gamma (1pt)
+#   - Vega (1pt)
+#   - Rho (1pt)
+# Assume you are long 1 share of the underlying and short 1 call option, calculate using MC assuming normal arthimetic returns with sigma=iv, mean=0 for 1 day forward
+#   - VaR (5%) Option, Stock, Combined (2.5pt)
+#   - ES (5%) Option, Stock, Combined (2.5pt)
+
+# Problem 3
+# Given Covariance (equal correlation), Risk Free Rate, Expected Return (equal sharpe)
+# Calculate the Maximum Sharpe Ration Portfolio (4pt)
+# Calculate the Risk Parity Portfolio (4pt)
+# Discuss the diffences between the portfolios and why (2pt) -- they should be the same per the notes
+
+# Problem 4
+# Given starting weights and 12 forward returns calculate
+#   - New weights for the start of each time period (2pt)
+#   - Return attribution for each asset (4pt)
+#   - Realized Risk attribution for each asset (4pt)
+
+# Problem 5
+# Input Prices (4 series)
+# Calculate arthimetic returns
+# Fit Generalize T model
+# Simulate with a Normal copula
+# Calculate VaR (5%) for each asset assuming a holding of 1 (3pt)
+# Calculate VaR (5%) for portfolios of 1+2 and 3+4 (4pt)
+# Calculate VaR (5%) for the total portfolio (3pt)
