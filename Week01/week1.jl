@@ -23,7 +23,7 @@ p = Plots.plot(df.x, df.pdf, label="PDF")
 df[!,:cdf] = cdf.(d,x)
 
 p = Plots.plot(df.x, df.cdf, label="CDF")
-Plots.savefig(p,"cdf.png")
+# Plots.savefig(p,"cdf.png")
 
 # Quick and dirty integration of the PDF
 n=501
@@ -108,7 +108,7 @@ println("Kurtosis versus Expected $(mean(kurts) - kurtosis(d))")
 # Test the kurtosis function for bias in small sample sizes
 d = Normal(0,1)
 sample_size = 100
-samples = 1000
+samples = 100
 kurts = Vector{Float64}(undef,samples)
 Threads.@threads for i in 1:samples
     kurts[i] = kurtosis(rand(d,sample_size))
@@ -117,13 +117,13 @@ end
 #summary statistics
 describe(kurts)
 
-t = mean(kurts)/sqrt(var(kurts)/samples)
-p = 2*(1 - cdf(TDist(samples-1),abs(t)))
+# t = mean(kurts)/sqrt(var(kurts)/samples)
+# p = 2*(1 - cdf(TDist(samples-1),abs(t)))
 
-println("p-value - $p")
+# println("p-value - $p")
 
 #using the Included TTest
-ttest = OneSampleTTest(kurts,kurtosis(d))
+ttest = OneSampleTTest(kurts,0.0)
 p2 = pvalue(ttest)
 
-println("Match the stats package test?: $(p ≈ p2)") 
+# println("Match the stats package test?: $(p ≈ p2)") 
