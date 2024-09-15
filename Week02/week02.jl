@@ -51,6 +51,7 @@ rho = cor(x,y)
 spearman = corspearman(x,y)
 
 p0 = Plots.plot(df.x, df.y, seriestype=:scatter, title=@sprintf("ρ = %.2f -- Spearman = %.2f",rho, spearman), legend=false)
+
 Plots.savefig(p0,"spearman.png")
 
 
@@ -90,6 +91,7 @@ end
 
 println("log likelihood N(0,1) = $(myll(0.0,1.0))")
 println("log likelihood N(1,5) = $(myll(1.0,5.0))")
+
 
 #MLE Optimization problem
     mle = Model(Ipopt.Optimizer)
