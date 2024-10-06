@@ -159,7 +159,7 @@ current = prices[size(prices,1),portfolio.Stock]
 # simReturns = returns
 # nSim = size(simReturns,1)
 
-nSim = 10000
+nSim = 1000000
 sim = simulate_pca(covar,nSim)
 simReturns = DataFrame(sim,portfolio.Stock)
 
@@ -230,7 +230,7 @@ println(VaRReport)
 #  Row │ Portfolio  currentValue  VaR95   
 #      │ String     Float64       Float64
 # ─────┼──────────────────────────────────
-#    1 │ A             1.26927e6  19918.5
-#    2 │ B             7.1795e5   11886.2
-#    3 │ C             1.22962e6  27248.0
-#    4 │ Total         3.21684e6  54201.5
+#    1 │ A             1.26927e6  19900.2
+#    2 │ B             7.1795e5   11751.1
+#    3 │ C             1.22962e6  27088.6
+#    4 │ Total         3.21684e6  54042.9
