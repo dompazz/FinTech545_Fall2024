@@ -129,7 +129,7 @@ println("StDev AAPL vs Simulated - $(std(aapl)) vs $(std(aapl_sim))")
 
 
 #Show block diagonal does not hold when not using the same X values in the simulation
-gm = returns.GE
+gm = returns.GM
 B_tsla, e_tsla = OLS(gm,tsla)
 B_aapl, e_aapl = OLS(spy,aapl)
 
@@ -247,7 +247,7 @@ normal = rand(mvn,NSim)'
 plot(pearson[:,1],pearson[:,2],seriestype=:scatter,label="Copula Pearson Corr", color=:red, legend=:bottomright)
 xlabel!("SPY")
 ylabel!("TSLA")
-plot!(spearman[:,1],spearman[:,2],seriestype=:scatter,label="Copula Separman Corr",color=:blue)
+plot!(spearman[:,1],spearman[:,2],seriestype=:scatter,label="Copula Spearman Corr",color=:blue)
 plot!(normal[:,1],normal[:,2],seriestype=:scatter,label="Normal Model",color=:violet)
 plot!(spy,tsla,seriestype=:scatter,label="Empirical",color=:green)
 
