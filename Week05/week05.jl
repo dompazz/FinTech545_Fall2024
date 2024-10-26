@@ -113,7 +113,7 @@ covar = cov(hcat(spy,e_tsla,e_aapl))
 means = vec(hcat(mean(spy),0,0))
 
 #same simulation as before
-nsim = 10000
+nsim = 1000000
 sim = rand(MvNormal(means,covar),nsim)'
 
 x_sim = hcat(fill(1.0,nsim),sim[:,1])
