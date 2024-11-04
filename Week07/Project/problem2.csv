@@ -1,0 +1,16 @@
+Portfolio,Type,Underlying,Holding,OptionType,ExpirationDate,Strike,CurrentPrice
+Straddle,Option,AAPL,1,Call,4/21/2023,150,6.8
+Straddle,Option,AAPL,1,Put,4/21/2023,150,4.85
+SynLong,Option,AAPL,1,Call,4/21/2023,150,6.8
+SynLong,Option,AAPL,-1,Put,4/21/2023,150,4.85
+CallSpread,Option,AAPL,1,Call,4/21/2023,150,6.8
+CallSpread,Option,AAPL,-1,Call,4/21/2023,160,2.21
+PutSpread,Option,AAPL,1,Put,4/21/2023,150,4.85
+PutSpread,Option,AAPL,-1,Put,4/21/2023,140,1.84
+Stock,Stock,AAPL,1,,,,151.03
+Call ,Option,AAPL,1,Call,4/21/2023,150,6.8
+Put ,Option,AAPL,1,Put,4/21/2023,150,4.85
+CoveredCall,Stock,AAPL,1,,,,151.03
+CoveredCall,Option,AAPL,-1,Call,4/21/2023,155,4.05
+ProtectedPut,Stock,AAPL,1,,,,151.03
+ProtectedPut,Option,AAPL,1,Put,4/21/2023,145,3.01
