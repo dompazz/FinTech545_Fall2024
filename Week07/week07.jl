@@ -141,12 +141,12 @@ r = rand(Normal(0,implied_vol/sqrt(255)),nSim)
 # Each long option PNL is new option value minus the starting value
 pnl = -100*([r.value for r in gbsm.(true,S*(1 .+r),X,ttm_new,rf,rf,implied_vol)] .- 2.5)
 
-#Calculate the VaR and ES
-var_unhedged = VaR(pnl)
-es_unhedged = ES(pnl)
+    #Calculate the VaR and ES
+    var_unhedged = VaR(pnl)
+    es_unhedged = ES(pnl)
 
-println("VaR UnHedged: $var_unhedged")
-println("ES UnHedged : $es_unhedged")
+    println("VaR UnHedged: $var_unhedged")
+    println("ES UnHedged : $es_unhedged")
 
 
 #MM is short 100 calls.  He wants to buy the negative of his delta to hedge
