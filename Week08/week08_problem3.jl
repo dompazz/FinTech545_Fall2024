@@ -155,13 +155,14 @@ end
 function SSE_CES(w...)
     ces = CES(w...)
     ces = ces .- mean(ces)
-    1e3*(ces'*ces)
+    1e5*(ces'*ces)
 end
     
 
 #Optimize to find RP based on Expected Shortfall
 n = length(stocks)
 
+#update convergence criteria
 m = Model(Ipopt.Optimizer)
 
 # Weights with boundry at 0
@@ -182,4 +183,3 @@ for i in 1:length(stocks)
     println(models[i].errorModel)
 end
 
-corsp

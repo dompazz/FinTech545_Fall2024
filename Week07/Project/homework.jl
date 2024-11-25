@@ -311,8 +311,7 @@ stocks = [:AAPL, :META, :UNH, :MA, :MSFT, :NVDA, :HD, :PFE, :AMZN, Symbol("BRK-B
 # Data set of all stock returns and FF3+1 returns
 to_reg = innerjoin(returns[!,vcat(:Date,stocks)], ffData, on=:Date)
 
-println("Max RF value is: $(max(to_reg.RF...))")
-#since the value is always 0, no need to difference the stock returns.
+# println("Max RF value is: $(max(to_reg.RF...))")
 
 xnames = [Symbol("Mkt-RF"), :SMB, :HML, :Mom]
 

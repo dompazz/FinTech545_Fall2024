@@ -100,7 +100,7 @@ upFfData=vcat(ffData,upFfData)
 select!(upFfData,Not(:RF))
 
 #filter the FF returns to just the Stock return data
-upFfData = innerjoin(upReturns,upFfData, on=:Date)[!,vcat(:Date,xnames)]
+# upFfData = innerjoin(upReturns,upFfData, on=:Date)[!,vcat(:Date,xnames)]
 
 #calculate portfolio return and updated weights for each day
 n = size(upReturns,1)
