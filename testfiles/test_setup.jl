@@ -1,7 +1,7 @@
 using CSV
 using Distributions
-using Plots
-using StatsPlots
+# using Plots
+# using StatsPlots
 using QuadGK
 using DataFrames
 using Ipopt
