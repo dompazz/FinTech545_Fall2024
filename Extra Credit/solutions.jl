@@ -48,6 +48,7 @@ println(w_sr)
 # [0.151884814714277, -0.13305637640771478, 0.9811715616934378]
 
 
+#Problem 2
 function sr2(w...)
     _w = collect(w)
     r = p1Data * _w .- RF
@@ -83,6 +84,7 @@ w_es = value.(w)
 println(w_es)
 # [0.45875612761827206, 0.03510777732773327, 0.5061360950539947]
 
+#Problem 3
 #why such a difference???
 es_r = p1Data * w_es .- RF
 sr_r = p1Data * w_sr .- RF
