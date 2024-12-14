@@ -36,7 +36,7 @@ include("../library/gbsm.jl")
 # The model uses the expected future value.  Modeling for risk analysis is focused predicting
 # the distribution of future values.  This encompasses not just the expected value, but also the
 # variance, skewness, kurtosis, and other moments of the distribution.  The goal is to understand
-# the potential outcomes and their likelihoods.
+# the potential outcomes and their likelihoods.3
 
 
 #2 - 5 points
@@ -168,9 +168,39 @@ CSV.write("problem4.csv", DataFrame(out,:auto))
 #a.
 data = CSV.read("problem4.csv",DataFrame) |> Matrix
 covar = ewCovar(data,0.94)
+# 5×5 Matrix{Float64}:
+#   0.00800778  -0.001406    -0.00417763   0.00181268   0.00055517
+#  -0.001406     0.00532315   0.00295607  -0.00223105   0.00270149
+#  -0.00417763   0.00295607   0.00583109  -0.00303737   0.00182102
+#   0.00181268  -0.00223105  -0.00303737   0.00285228  -0.00215035
+#   0.00055517   0.00270149   0.00182102  -0.00215035   0.00244845
 w_std,status = riskParity(covar)
 println(w_std)
+
 # [0.08325194470526755, 0.08296831943674841, 0.2131321542254191, 0.42411305053917386, 0.1965345310933912]
+
+function ewCovar2(x,λ)
+    m,n = size(x)
+
+    #Calculate the weights
+    w = expW(m,λ)
+
+    #Remove the weighted mean from the series and add the weights to the covariance calculation
+    xm = sqrt.(w) .* (x .- mean(x,dims=1))
+
+    #covariance = (sqrt(w) # x)' * (sqrt(w) # x)  where # is elementwise multiplication.
+    return xm' * xm
+end
+covar = ewCovar2(data,0.94)
+# 5×5 Matrix{Float64}:
+#   0.00806428   -0.0016624   -0.00427848   0.00188879   0.000444114
+#  -0.0016624     0.00648666   0.00341373  -0.00257643   0.00320545
+#  -0.00427848    0.00341373   0.00601111  -0.00317323   0.00201925
+#   0.00188879   -0.00257643  -0.00317323   0.00295481  -0.00229995
+#   0.000444114   0.00320545   0.00201925  -0.00229995   0.00266674
+w_std,status = riskParity(covar)
+# Alt ewCov method, is OK
+# [0.0862812080293293, 0.07741278065890032, 0.21589777171317712, 0.42948572877750035, 0.1909225108210929]
 
 #b.
 # the expected shortfall of the 5% quantile of the portfolio returns assuming multivariate normality
@@ -287,6 +317,8 @@ portfolio[4,:Price] = 6.5
 portfolio[4,:Delta] = gbsm(true,100,100,100/252,rf,rf,portfolio[4,:Vol]).delta
 portfolio[!,:Value] = portfolio[!,:Amount] .* portfolio[!,:Price]
 
+pvalue = sum(portfolio.Value)
+# 15292.72907299572
 
 #a. Calculate the Delta Normal portfolio VaR
 #asset deltas
@@ -344,7 +376,7 @@ models = Dict{String,FittedModel}()
 for a in assets
     normal = fit_normal(returns[!,a])
     t = fit_general_t(returns[!,a])
-    # println("Asset: ", a, " Normal AICC: ", AICC(normal.errorModel, returns[!,a],2), " T AICC: ", AICC(t.errorModel, returns[!,a],3))
+    println("Asset: ", a, " Normal AICC: ", AICC(normal.errorModel, returns[!,a],2), " T AICC: ", AICC(t.errorModel, returns[!,a],3))
     if AICC(normal.errorModel, returns[!,a],2) < AICC(t.errorModel, returns[!,a],3)
         models[a] = normal
     else
